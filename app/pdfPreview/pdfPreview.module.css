@@ -1,0 +1,56 @@
+.consignment-note {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+  }
+  .header,
+  .footer {
+    text-align: center;
+  }
+  .section {
+    margin-bottom: 20px;
+  }
+  .forTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+ 
+  .tableheading{
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  .tabledata{
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+  }
+  .tabledataForDesc{
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+    width: 40rem;
+  }
+  .heading {
+    font-weight: bold;
+    margin-left:1rem;
+  }
+  .footer {
+    margin-top: 30px;
+  }
+  .footer div {
+    margin-bottom: 10px;
+  }
+  /* .footer hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  } */
+  .btn{
+    display: flex;
+    justify-content: center;
+    margin:1rem;
+  }
