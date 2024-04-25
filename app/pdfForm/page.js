@@ -312,7 +312,7 @@ export default function PdfForm() {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="consigner" className="form-label required">
-                    Consigner
+                    Consigner Name
                   </label>
                   <input
                     type="text"
@@ -355,31 +355,31 @@ export default function PdfForm() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="royalty" className="form-label required">
-                    Royalty
+                  <label htmlFor="royalti" className="form-label required">
+                    Royalti
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="royalty"
+                    id="royalti"
                     value={royalty}
                     onChange={(e) => setRoyalty(e.target.value)}
-                    placeholder="Royalty"
+                    placeholder="Royalti"
                   />
                 </div>
               </div>
               <div className="row-inputfields">
                 <div className="mb-3">
-                  <label htmlFor="venue" className="form-label required">
-                    Venue
+                  <label htmlFor="value" className="form-label required">
+                    Value
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="venue"
+                    id="value"
                     value={venue}
                     onChange={(e) => setVenue(e.target.value)}
-                    placeholder="Venue"
+                    placeholder="value"
                   />
                 </div>
                 <div className="mb-3">
