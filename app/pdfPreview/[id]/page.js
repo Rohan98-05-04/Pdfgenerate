@@ -166,11 +166,11 @@ export default function PdfForm(params) {
                     <tr>
                       <th className={styles.tableheading}>Consignee Name</th>
                       <td className={styles.tabledata}>
-                      [Consignee Name]
+                      [MINESTONE EXPORTS VIJAYNAGAR]
                       </td>
                       <th className={styles.tableheading}>Consignee GSITN</th>
                       <td className={styles.tabledata}>
-                      [05ASSPC6983E1QR]
+                      [08AJYPC8136A1Z5]
                       </td>
                     </tr>
                   </thead>
@@ -241,11 +241,11 @@ export default function PdfForm(params) {
                       {previewPdfData.invoiceNo}
                     </p>
                     <p>
-                      <span className={styles.heading}>Royalty:</span>
+                      <span className={styles.heading}>Royalti:</span>
                       {previewPdfData.royalty}
                     </p>
                     <p>
-                      <span className={styles.heading}>Venue:</span>{" "}
+                      <span className={styles.heading}>Value:</span>{" "}
                       {previewPdfData.venue}
                     </p>
                   </div>

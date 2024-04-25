@@ -369,7 +369,7 @@ export default function EditPdfForm(params) {
               </div>
               <div className="mb-3">
                 <label htmlFor="consigner" className="form-label required">
-                  Consigner
+                  Consigner Name
                 </label>
                 <input
                   type="text"
@@ -412,33 +412,33 @@ export default function EditPdfForm(params) {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="royalty" className="form-label required">
-                  Royalty
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="royalty"
-                  value={royalty}
-                  onChange={(e) => setRoyalty(e.target.value)}
-                  placeholder="Royalty"
-                />
+                  <label htmlFor="royalti" className="form-label required">
+                    Royalti
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="royalti"
+                    value={royalty}
+                    onChange={(e) => setRoyalty(e.target.value)}
+                    placeholder="Royalti"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="row-inputfields">
-              <div className="mb-3">
-                <label htmlFor="venue" className="form-label required">
-                  Venue
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="venue"
-                  value={venue}
-                  onChange={(e) => setVenue(e.target.value)}
-                  placeholder="Venue"
-                />
-              </div>
+              <div className="row-inputfields">
+                <div className="mb-3">
+                  <label htmlFor="value" className="form-label required">
+                    Value
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="value"
+                    value={venue}
+                    onChange={(e) => setVenue(e.target.value)}
+                    placeholder="value"
+                  />
+                </div>
               <div className="mb-3">
                 <label htmlFor="payment" className="form-label required">
                   Payment Method
