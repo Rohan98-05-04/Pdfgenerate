@@ -18,7 +18,18 @@
   z-index: 2;
   font-family: var(--font-mono);
 }
+.button{
+  background-color: #0ca4fc !important;
+  color: white !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
 
+}
+.donationButtons{
+  height: 2rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
 .description a {
   display: flex;
   justify-content: center;

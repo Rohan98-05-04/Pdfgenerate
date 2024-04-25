@@ -20,18 +20,18 @@ const PdfModal = ({
           <div className={styles["modal-container"]}>
             <div className={styles["modal-header"]}>
               <h3 className={styles["modal-heading"]}>{heading}</h3>
-              {/* <button
+              <button
                 onClick={onClose}
                 className={styles["close-btn"]}
               >
                 X
-              </button> */}
+              </button>
             </div>
             <div className={styles["modal-body"]}>{children}</div>
             <div className={styles["modal-footer"]}>
-                {/* <div>{negativeText}</div> */}
+                <div>{negativeText}</div>
                 <div className={styles["footer-container"]}>
-                    {/* <TextButton onClick={onCancel} fontWeight={'normal'} label={negativeText} /> */}
+                    <TextButton onClick={onCancel} fontWeight={'normal'} label={negativeText} />
                     <div className="ml-5">
                       <InlineButton onClick={onSubmit} label={positiveText} />
                     </div>

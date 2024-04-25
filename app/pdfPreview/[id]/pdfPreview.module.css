@@ -29,6 +29,12 @@
     padding: 8px;
     text-align: center;
   }
+  .tabledatatotal{
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+  }
   .tabledataForDesc{
     border: 1px solid #000;
     padding: 8px;
@@ -39,6 +45,19 @@
     font-weight: bold;
     margin-left:1rem;
   }
+  .donationButtons{
+    height: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 1rem;
+}
+.button{
+  background-color: #0ca4fc !important;
+  color: white !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+
+}
   .footer {
     margin-top: 30px;
   }
@@ -53,4 +72,5 @@
     display: flex;
     justify-content: center;
     margin:1rem;
+    
   }

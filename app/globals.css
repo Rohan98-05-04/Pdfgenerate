@@ -100,6 +100,10 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
 .required::after {
   content: " *";
   color: red;
@@ -112,5 +116,10 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+@media (max-width: 1000px) {
+  .row-inputfields {
+    flex-direction: column;
   }
 }

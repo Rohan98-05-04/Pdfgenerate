@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import styles from "../page.module.css";
+import styles from "../../page.module.css";
 import Router, { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { API_BASE_URL } from "@/utils/config";
 import Link from "next/link";
-export default function PdfForm() {
+export default function EditPdfForm(params) {
+    console.log("params",params)
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [date, setDate] = useState("");
@@ -24,16 +25,58 @@ export default function PdfForm() {
   const [venue, setVenue] = useState("");
   const [consigner, setConsigner] = useState("");
   const [fields, setFields] = useState([
-    {
-      description: "",
-      descriptionGSTIN: "",
-      payment: "",
-      noOfArticles: "",
-      weight: "",
-      freightRate: "",
-      freightAmount: "",
-    },
+    // {
+    //   description: "",
+    //   descriptionGSTIN: "",
+    //   payment: "",
+    //   noOfArticles: "",
+    //   weight: "",
+    //   freightRate: "",
+    //   freightAmount: "",
+    // },
   ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `${API_BASE_URL}/getPDFById/${params.params.editPdfForm}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("GEt all pdf Data for Update", data);
+       
+         setNumber(data?.no || "")
+        setDate(data?.date.slice(0,10) || "")
+         setFrom(data?.from || "")
+         setTo(data?.to || "")
+       setTruckType(data?.truckType || "")
+         setDriver(data?.driver || "")
+         setTruckNo(data?.truckNo || "")
+         setMobileNumber(data?.mobileNumber || "")
+        setConsigneeName(data?.consigneeName || "")
+         setConsigneeGSTIN(data?.consigneeGSTIN || "")
+         setInvoiceNo(data?.invoiceNo || "")
+        setRoyalty(data?.royalty || "")
+         setVenue(data?.venue || "")
+         setConsigner(data?.consigner || "")
+         setFields(data?.detail || "")
+      } else {
+        const data = await response.json();
+        toast.error(data.error, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    };
+    fetchData();
+  }, [params]);
+
 
   const handleChange = (index, event) => {
     const values = [...fields];
@@ -73,7 +116,7 @@ export default function PdfForm() {
   };
   const router = useRouter();
   const submitForm = () => {
-   
+    
     if (!number) {
       toast.error("Number is required");
       return false;
@@ -164,8 +207,8 @@ export default function PdfForm() {
       };
       console.log("allPdfData", allPdfData);
       const fetchData = async () => {
-        const response = await fetch(`${API_BASE_URL}/addPDF`, {
-          method: "POST",
+        const response = await fetch(`${API_BASE_URL}/updatePDF/${params.params.editPdfForm}`, {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -174,8 +217,8 @@ export default function PdfForm() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("After submit pdf Data",data)
-          router.push("/dashboard");
+          console.log("After Updated pdf Data",data)
+           router.push("/dashboard");
         } else {
           const data = await response.json();
           toast.error(data.error);
@@ -187,7 +230,10 @@ export default function PdfForm() {
       return false;
     }
 
-  
+    // if (allPdfData) {
+    //   localStorage.setItem("pdfData", JSON.stringify(allPdfData));
+    //   router.push("/pdfPreview");
+    // }
   };
 
   return (
@@ -210,6 +256,10 @@ export default function PdfForm() {
                 {" "}
                 Minestone Infradev
               </h1>
+              <h4 className="font-weight-bold text-decoration-underline">
+                {" "}
+                Update your details
+              </h4>
               <div className="row-inputfields">
                
                 <div className="mb-3">
