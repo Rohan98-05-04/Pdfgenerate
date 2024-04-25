@@ -169,7 +169,10 @@ export default function PdfForm() {
         if (response.ok) {
           const data = await response.json();
           console.log("After submit pdf Data", data);
-          router.push("/dashboard");
+          if(data.data){
+            router.push(`/pdfPreview/${data.data._id}`);
+          }
+        
         } else {
           const data = await response.json();
           toast.error(data.error);
