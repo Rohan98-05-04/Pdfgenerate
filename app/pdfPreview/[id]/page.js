@@ -54,19 +54,18 @@ export default function PdfForm(params) {
 
   const downloadPDF = () => {
     const element = document.getElementById("content-to-pdf");
-    // const opt = {
-    //     margin: 0.5,
-    //     filename: 'myfile.pdf',
-    //     image: { type: 'jpeg', quality: 0.98 },
-    //     html2canvas: { scale: 2 },
-    //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-    //     pagebreak: { mode: 'avoid-all' },
-    //     pagebreak: { mode: 'css', before: '#page1', after: '#page2' }
-    //   };
-    html2pdf().from(element).save();
+    html2pdf().from(element).toPdf().get('pdf').then(function (pdf) {
+        // Convert the PDF content to a blob
+        const blob = new Blob([pdf.output('blob')], { type: 'application/pdf' });
+        // Create a URL for the blob
+        const url = URL.createObjectURL(blob);
+        // Open the URL in a new tab
+        window.open(url, '_blank');
+    });
     localStorage.removeItem("pdfData");
-    router.push("/pdfForm");
-  };
+    router.push("/dashboard");
+};
+
 
   return (
     <>
@@ -109,10 +108,10 @@ export default function PdfForm(params) {
                 </p>
                 <h5>GOODS CONSIGNMENT NOTE</h5>
                 <p>
-                  <span className={styles.heading}>No.</span> :[
-                  {previewPdfData.no}]
-                  <span className={styles.heading}>Date:</span>[
-                  {previewPdfData.date.slice(0, 10)}]
+                  <span className={styles.heading}>No.</span> :
+                  {previewPdfData.no}
+                  <span className={styles.heading}>Date:</span>
+                  {previewPdfData.date.slice(0, 10)}
                 </p>
                 <p>
                   <span className={styles.heading}>From:</span> :{" "}
@@ -128,21 +127,21 @@ export default function PdfForm(params) {
                     <tr className={styles.tableRow}>
                       <th className={styles.tableheading}>TRUCK NO</th>
                       <td className={styles.tabledata}>
-                        [{previewPdfData.truckNo}]
+                        {previewPdfData.truckNo}
                       </td>
                       <th className={styles.tableheading}>Driver</th>
                       <td className={styles.tabledata}>
-                        [{previewPdfData.driver}]
+                        {previewPdfData.driver}
                       </td>
                     </tr>
                     <tr>
                       <th className={styles.tableheading}>TRUCK TYPE</th>
                       <td className={styles.tabledata}>
-                        [{previewPdfData.truckType}]
+                        {previewPdfData.truckType}
                       </td>
                       <th className={styles.tableheading}>MOBILE</th>
                       <td className={styles.tabledata}>
-                        [{previewPdfData.mobileNumber}]
+                        {previewPdfData.mobileNumber}
                       </td>
                     </tr>
                   </thead>
@@ -156,21 +155,21 @@ export default function PdfForm(params) {
                     <tr className={styles.tableRow}>
                       <th className={styles.tableheading}>Consignor Name</th>
                       <td className={styles.tabledata}>
-                      [{previewPdfData.consigner}]
+                      {previewPdfData.consigner}
                       </td>
                       <th className={styles.tableheading}>Consigner GSITN</th>
                       <td className={styles.tabledata}>
-                      [{previewPdfData.consignerGSTIN}]
+                      {previewPdfData.consignerGSTIN}
                       </td>
                     </tr>
                     <tr>
                       <th className={styles.tableheading}>Consignee Name</th>
                       <td className={styles.tabledata}>
-                      [MINESTONE EXPORTS VIJAYNAGAR]
+                    MINESTONE EXPORTS VIJAYNAGAR
                       </td>
                       <th className={styles.tableheading}>Consignee GSITN</th>
                       <td className={styles.tabledata}>
-                      [08AJYPC8136A1Z5]
+                      08AJYPC8136A1Z5
                       </td>
                     </tr>
                   </thead>
@@ -202,14 +201,14 @@ export default function PdfForm(params) {
                          
                         </td>
                         <td className={styles.tabledata}>
-                          [{item.noOfArticles}]
+                          {item.noOfArticles}
                         </td>
-                        <td className={styles.tabledata}>[{item.weight}]</td>
+                        <td className={styles.tabledata}>{item.weight}</td>
                         <td className={styles.tabledata}>
-                          [{item.freightRate}]
+                          {item.freightRate}
                         </td>
                         <td className={styles.tabledata}>
-                          [{item.freightAmount}]
+                          {item.freightAmount}
                         </td>
                       </tr>
                     ))}
@@ -217,14 +216,14 @@ export default function PdfForm(params) {
                     <tr>
                       <td colSpan="3" className={styles.tabledata}>
                       <span className={styles.heading}>Payment Method:</span>
-                          <span> [{previewPdfData.paymentMethod}]</span>
+                          <span> {previewPdfData.paymentMethod}</span>
                       </td>
 
                       <td className={styles.tabledatatotal}>Total</td>
                       {totalamount ? (
-                        <td className={styles.tabledatatotal}>{[totalamount]}</td>
+                        <td className={styles.tabledatatotal}>{totalamount}</td>
                       ) : (
-                        <td className={styles.tabledata}>[Total Amount]</td>
+                        <td className={styles.tabledata}>Total Amount</td>
                       )}
                     </tr>
                   </tbody>
@@ -238,15 +237,15 @@ export default function PdfForm(params) {
                   >
                     <p>
                       <span className={styles.heading}>Invoice No:</span>
-                      {previewPdfData.invoiceNo}
+                    <span>{previewPdfData.invoiceNo}</span>
                     </p>
                     <p>
                       <span className={styles.heading}>Royalti:</span>
-                      {previewPdfData.royalty}
+                      <span>{previewPdfData.royalty}</span>
                     </p>
                     <p>
                       <span className={styles.heading}>Value:</span>{" "}
-                      {previewPdfData.venue}
+                      <span>{previewPdfData.venue}</span>   
                     </p>
                   </div>
                   <hr />
