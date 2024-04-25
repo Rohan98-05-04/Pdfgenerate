@@ -18,16 +18,15 @@ export default function PdfForm() {
   const [truckNo, setTruckNo] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [consigneeName, setConsigneeName] = useState("");
-  const [consigneeGSTIN, setConsigneeGSTIN] = useState("");
+  const [consignerGSTIN, setConsignerGSTIN] = useState("");
   const [invoiceNo, setInvoiceNo] = useState("");
   const [royalty, setRoyalty] = useState("");
   const [venue, setVenue] = useState("");
   const [consigner, setConsigner] = useState("");
+  const [payment, setPayment] = useState("");
   const [fields, setFields] = useState([
     {
       description: "",
-      descriptionGSTIN: "",
-      payment: "",
       noOfArticles: "",
       weight: "",
       freightRate: "",
@@ -45,8 +44,6 @@ export default function PdfForm() {
     const lastField = fields[fields.length - 1];
     const requiredFields = [
       "description",
-      "descriptionGSTIN",
-      "payment",
       "noOfArticles",
       "weight",
       "freightRate",
@@ -57,8 +54,6 @@ export default function PdfForm() {
     if (isValid) {
       const newField = {
         description: "",
-        descriptionGSTIN: "",
-        payment: "",
         noOfArticles: "",
         weight: "",
         freightRate: "",
@@ -73,7 +68,6 @@ export default function PdfForm() {
   };
   const router = useRouter();
   const submitForm = () => {
-   
     if (!number) {
       toast.error("Number is required");
       return false;
@@ -120,12 +114,8 @@ export default function PdfForm() {
       toast.error("Consigner is required");
       return false;
     }
-    if (!consigneeName) {
-      toast.error("Consignee Name is required");
-      return false;
-    }
-    if (!consigneeGSTIN) {
-      toast.error("Consignee GSTIN is required");
+    if (!consignerGSTIN) {
+      toast.error("Consigner GSTIN is required");
       return false;
     }
     if (!invoiceNo) {
@@ -138,6 +128,10 @@ export default function PdfForm() {
     }
     if (!venue) {
       toast.error("Venue is required");
+      return false;
+    }
+    if (!payment) {
+      toast.error("Payment method is required");
       return false;
     }
     const isValid = fields.every((field) => {
@@ -155,11 +149,11 @@ export default function PdfForm() {
         truckNo: truckNo,
         mobileNumber: mobileNumber,
         consigner: consigner,
-        consigneeName: consigneeName,
-        consigneeGSTIN: consigneeGSTIN,
+        consignerGSTIN: consignerGSTIN,
         invoiceNo: invoiceNo,
         royalty: royalty,
         venue: venue,
+        paymentMethod:payment,
         detail: fields,
       };
       console.log("allPdfData", allPdfData);
@@ -174,7 +168,7 @@ export default function PdfForm() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("After submit pdf Data",data)
+          console.log("After submit pdf Data", data);
           router.push("/dashboard");
         } else {
           const data = await response.json();
@@ -186,23 +180,19 @@ export default function PdfForm() {
       toast.error("Please fill in all required fields of table.");
       return false;
     }
-
-  
   };
 
   return (
     <main className={styles.main}>
       <div className="container">
-      <div
-            className={`${styles.donationButtons} d-flex justify-content-between mb-3  `}
-          >
-            <Link href="/dashboard">
-              {" "}
-              <button className={`btn addDonarBtn ${styles.button}`}>
-                Back
-              </button>
-            </Link>
-          </div>
+        <div
+          className={`${styles.donationButtons} d-flex justify-content-between mb-3  `}
+        >
+          <Link href="/dashboard">
+            {" "}
+            <button className={`btn addDonarBtn ${styles.button}`}>Back</button>
+          </Link>
+        </div>
         <form>
           <div className="row justify-content-center">
             <div className="col-md-12">
@@ -211,7 +201,6 @@ export default function PdfForm() {
                 Minestone Infradev
               </h1>
               <div className="row-inputfields">
-               
                 <div className="mb-3">
                   <label htmlFor="number" className="form-label required">
                     Number
@@ -253,7 +242,6 @@ export default function PdfForm() {
               </div>
               <div className="row-inputfields">
                 {" "}
-                
                 <div className="mb-3">
                   <label htmlFor="to" className="form-label required">
                     To
@@ -296,7 +284,6 @@ export default function PdfForm() {
               </div>
               <div className="row-inputfields">
                 {" "}
-                
                 <div className="mb-3">
                   <label htmlFor="truckNo" className="form-label required">
                     Truck No.
@@ -333,43 +320,25 @@ export default function PdfForm() {
                     id="consigner"
                     value={consigner}
                     onChange={(e) => setConsigner(e.target.value)}
-                    placeholder="Consignee GSTIN"
+                    placeholder="Consigner Name"
                   />
                 </div>
               </div>
               <div className="row-inputfields">
-                {" "}
-               
                 <div className="mb-3">
                   <label
-                    htmlFor="consigneeName"
+                    htmlFor="consignerGSTIN"
                     className="form-label required"
                   >
-                    Consignee Name
+                    Consigner GSTIN
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="consigneeName"
-                    value={consigneeName}
-                    onChange={(e) => setConsigneeName(e.target.value)}
-                    placeholder="Consignee Name"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label
-                    htmlFor="consigneeGSTIN"
-                    className="form-label required"
-                  >
-                    Consignee GSTIN
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="consigneeGSTIN"
-                    value={consigneeGSTIN}
-                    onChange={(e) => setConsigneeGSTIN(e.target.value)}
-                    placeholder="Consignee GSTIN"
+                    id="consignerGSTIN"
+                    value={consignerGSTIN}
+                    onChange={(e) => setConsignerGSTIN(e.target.value)}
+                    placeholder="Consigner GSTIN"
                   />
                 </div>
                 <div className="mb-3">
@@ -385,120 +354,6 @@ export default function PdfForm() {
                     placeholder="Invoice No"
                   />
                 </div>
-              </div>
-
-              {/* <div className="mb-3">
-                <label htmlFor="description" className="form-label required">
-                  Description
-                </label>
-                <textarea
-                  type="text"
-                  className="form-control"
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Description"
-                />
-              </div>
-              <div className="mb-3">
-                  <label
-                    htmlFor="descriptionGSTIN"
-                    className="form-label required"
-                  >
-                    Description GSTIN
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="descriptionGSTIN"
-                    value={descriptionGSTIN}
-                    onChange={(e) => setDescriptionGSTIN(e.target.value)}
-                    placeholder="Description GSTIN"
-                  />
-                </div> */}
-
-              {/* <div className="row-inputfields">
-                {" "}
-                <div className="mb-3">
-                  <label htmlFor="payment" className="form-label required">
-                    Payment
-                  </label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="payment"
-                    value={payment}
-                    onChange={(e) => setPayment(e.target.value)}
-                    placeholder="Payment"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label
-                    htmlFor="noOfArticles"
-                    className="form-label required"
-                  >
-                    No. of Articles
-                  </label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="noOfArticles"
-                    value={noOfArticles}
-                    onChange={(e) => setNumOfArticles(e.target.value)}
-                    placeholder="No. of Articles"
-                  />
-                </div>
-              </div> */}
-
-              {/* <div className="row-inputfields">
-                {" "}
-                <div className="mb-3">
-                  <label htmlFor="weight" className="form-labelrequired ">
-                    Weight (Mt)
-                  </label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="weight"
-                    value={weight}
-                    onChange={(e) => setWeight(e.target.value)}
-                    placeholder="Weight (Mt)"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="freightRate" className="form-label required">
-                    Freight Rate/MT
-                  </label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="freightRate"
-                    value={freightRate}
-                    onChange={(e) => setFreightRate(e.target.value)}
-                    placeholder="Freight Rate/MT"
-                  />
-                </div> */}
-              {/* </div> */}
-
-              {/* <div className="mb-3">
-                  <label
-                    htmlFor="freightAmount"
-                    className="form-label required"
-                  >
-                    Freight Amount
-                  </label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="freightAmount"
-                    value={freightAmount}
-                    onChange={(e) => setFreightAmount(e.target.value)}
-                    placeholder="Freight Amount"
-                  />
-                </div> */}
-
-              <div className="row-inputfields">
-               
                 <div className="mb-3">
                   <label htmlFor="royalty" className="form-label required">
                     Royalty
@@ -512,6 +367,8 @@ export default function PdfForm() {
                     placeholder="Royalty"
                   />
                 </div>
+              </div>
+              <div className="row-inputfields">
                 <div className="mb-3">
                   <label htmlFor="venue" className="form-label required">
                     Venue
@@ -525,6 +382,20 @@ export default function PdfForm() {
                     placeholder="Venue"
                   />
                 </div>
+                <div className="mb-3">
+                  <label htmlFor="payment" className="form-label required">
+                    Payment Method
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="payment"
+                    value={payment}
+                    onChange={(e) => setPayment(e.target.value)}
+                    placeholder="Payment Method"
+                  />
+                </div>
+                {/* tbelow field for hidden  */}
                 <div className="hidden mb-3">
                   <label htmlFor="venue" className="form-label required">
                     Venue
@@ -533,8 +404,6 @@ export default function PdfForm() {
                     type="text"
                     className="form-control"
                     id="venue"
-                    value={venue}
-                    onChange={(e) => setVenue(e.target.value)}
                     placeholder="Venue"
                   />
                 </div>
@@ -543,13 +412,11 @@ export default function PdfForm() {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th>Description</th>
-                      <th>Description GSTIN</th>
-                      <th>Payment</th>
-                      <th>No. of Articles</th>
-                      <th>Weight (Mt)</th>
-                      <th>Freight Rate/MT</th>
-                      <th>Freight Amount</th>
+                      <th className="required">Description</th>
+                      <th className="required">No. of Articles</th>
+                      <th className="required">Weight (Mt)</th>
+                      <th className="required">Freight Rate/MT</th>
+                      <th className="required">Freight Amount</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -563,26 +430,6 @@ export default function PdfForm() {
                             value={field.description}
                             onChange={(e) => handleChange(index, e)}
                             placeholder="Description"
-                          />
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="descriptionGSTIN"
-                            value={field.descriptionGSTIN}
-                            onChange={(e) => handleChange(index, e)}
-                            placeholder="Description GSTIN"
-                          />
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            className="form-control"
-                            id="payment"
-                            value={field.payment}
-                            onChange={(e) => handleChange(index, e)}
-                            placeholder="Payment"
                           />
                         </td>
                         <td>

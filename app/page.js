@@ -29,7 +29,7 @@ export default function Home() {
       const randomString = generateRandomString(200); 
       sessionStorage.setItem("token",randomString)
       // Redirect to dashboard or any other page after successful login
-      router.push('/dashboard');
+       router.push('/dashboard');
     } else {
       toast.error('Invalid username or password. Please try again.');
     }
