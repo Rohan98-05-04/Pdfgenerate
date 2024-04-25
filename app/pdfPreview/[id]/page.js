@@ -81,6 +81,15 @@ export default function PdfForm(params) {
                 Back
               </button>
             </Link>
+            <div className={styles.btn}>
+            <button
+              type="button"
+              className={`btn ${styles.button}`}
+              onClick={downloadPDF}
+            >
+              Download PDF
+            </button>
+          </div>
           </div>
           <div
             className="row justify-content-center m-5 mt-1"
@@ -88,7 +97,7 @@ export default function PdfForm(params) {
           >
             <div className="col-md-12 m-3">
               <div className={styles.header}>
-                <h3>MINESTONE INFRADEV</h3>
+                <h4>MINESTONE INFRADEV</h4>
                 <p className={styles.heading}>
                   Bapu Bazar,Bijainagar,Ajmer,Rajasthan,305624
                 </p>
@@ -98,7 +107,7 @@ export default function PdfForm(params) {
                 <p>
                   <span className={styles.heading}>GSTIN:</span> 08ANNPC6983E1ZP
                 </p>
-                <h4>GOODS CONSIGNMENT NOTE</h4>
+                <h5>GOODS CONSIGNMENT NOTE</h5>
                 <p>
                   <span className={styles.heading}>No.</span> :[
                   {previewPdfData.no}]
@@ -141,31 +150,35 @@ export default function PdfForm(params) {
                   {/* <!-- Add more rows as needed --> */}
                 </table>
               </div>
-              <div className={styles.main}>
-                <div className={styles.section}>
-                  <table className={styles.forTable}>
-                    <thead>
-                      <tr aria-rowspan={1}>
-                        <th className={styles.tableheading}>Consignor</th>
-                        <td className={styles.tabledata} colspan="3">
-                          [{previewPdfData.consigner}]
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className={styles.tableheading}>Consignee Name</th>
-                        <td className={styles.tabledata}>
-                          [{previewPdfData.consigneeName}]
-                        </td>
-                        <th className={styles.tableheading}>Consignee GSITN</th>
-                        <td className={styles.tabledata}>
-                          [{previewPdfData.consigneeGSTIN}]
-                        </td>
-                      </tr>
-                    </thead>
-                    {/* <!-- Add more rows as needed --> */}
-                  </table>
-                </div>
+              <div className={styles.section}>
+                <table className={styles.forTable}>
+                  <thead>
+                    <tr className={styles.tableRow}>
+                      <th className={styles.tableheading}>Consignor Name</th>
+                      <td className={styles.tabledata}>
+                      [{previewPdfData.consigner}]
+                      </td>
+                      <th className={styles.tableheading}>Consigner GSITN</th>
+                      <td className={styles.tabledata}>
+                      [{previewPdfData.consignerGSTIN}]
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className={styles.tableheading}>Consignee Name</th>
+                      <td className={styles.tabledata}>
+                      [Consignee Name]
+                      </td>
+                      <th className={styles.tableheading}>Consignee GSITN</th>
+                      <td className={styles.tabledata}>
+                      [05ASSPC6983E1QR]
+                      </td>
+                    </tr>
+                  </thead>
+
+                  {/* <!-- Add more rows as needed --> */}
+                </table>
               </div>
+             
               <div className={styles.section}>
                 <table className={styles.forTable}>
                   <thead>
@@ -185,12 +198,8 @@ export default function PdfForm(params) {
                       <tr key={index}>
                         <td className={styles.tabledataForDesc}>
                           <p>{item.description}</p>
-                          <p>
-                            <span className={styles.heading}>GSTIN:</span>
-                            <span>[{item.descriptionGSTIN}]</span>
-                          </p>
-                          <span className={styles.heading}>Payment:</span>
-                          <span> [{item.payment}]</span>
+                         
+                         
                         </td>
                         <td className={styles.tabledata}>
                           [{item.noOfArticles}]
@@ -206,7 +215,10 @@ export default function PdfForm(params) {
                     ))}
 
                     <tr>
-                      <td colSpan="3" className={styles.tabledata}></td>
+                      <td colSpan="3" className={styles.tabledata}>
+                      <span className={styles.heading}>Payment Method:</span>
+                          <span> [{previewPdfData.paymentMethod}]</span>
+                      </td>
 
                       <td className={styles.tabledatatotal}>Total</td>
                       {totalamount ? (
@@ -252,15 +264,7 @@ export default function PdfForm(params) {
               </div>
             </div>
           </div>
-          <div className={styles.btn}>
-            <button
-              type="button"
-              className={`btn ${styles.button}`}
-              onClick={downloadPDF}
-            >
-              Download PDF
-            </button>
-          </div>
+         
         </div>
       ) : null}
     </>

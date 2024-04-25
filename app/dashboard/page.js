@@ -156,9 +156,9 @@ const logOut=()=>{
                   <thead>
                     <tr>
                       <th scope="col">Invoice No.</th>
-                      <th scope="col">ConsigneeName</th>
+                      <th scope="col">Consigner Name</th>
+                      <th scope="col">Date</th>
                       <th scope="col">From</th>
-                      <th scope="col">To</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -166,9 +166,9 @@ const logOut=()=>{
                     {allPdfData.map((item, index) => (
                       <tr key={index}>
                         <td>{item.invoiceNo}</td>
-                        <td>{item.consigneeName}</td>
+                        <td>{item.consigner}</td>
+                        <td>{item.date.slice(0,10)}</td>
                         <td>{item.from}</td>
-                        <td>{item.to}</td>
                         <td>
                           <Link href={`/pdfForm/${item._id}`}>
                             <AiFillEdit className="red" />
